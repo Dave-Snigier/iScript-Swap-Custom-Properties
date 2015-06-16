@@ -1,0 +1,60 @@
+#Yaml config
+
+# queue config file is for
+currentQueue: DUA PreApp 
+
+# Where to route documents that the script errors on
+errorQueue: DUA Error
+
+# The remapping logic will only run for documents coming from the following queues
+previousQueues:
+  - DUA PreApp Results
+
+# custom property whitelist (the script won't erase these)
+saveProperties:
+  - tmp_preapp-Emplid
+  - Checklist Update
+  - Application Plan
+  - Document App Plan
+  - Needs Data Entry
+  - SA Org ID
+  - CEEB
+  - Recommender Name
+
+# index property whitelist (the script won't erase these)
+saveIndexes:
+  - drawer
+  - docTypeName
+  - f5
+
+
+# destName/sourceName = name of index key or property or transform function (output only)
+# destType/sourceType = type of value the name is (property, index, transform)
+# For example: in the following first block CP value (because, Source Type is Property) of tmp_preapp-lname (SourceName) will be copied to the --
+# -- folder's (destination name) Index value (as destination type is Index) 
+remapValues:
+  - destName: folder
+    destType: index
+    sourceName: tmp_preapp-lname
+    sourceType: property
+  - destName: tab
+    destType: index
+    sourceName: tmp_preapp-fname
+    sourceType: property
+  - destName: f3
+    destType: index
+    sourceName: tmp_preapp-mname
+    sourceType: property
+  - destName: f4
+    destType: index
+    sourceName: tmp_preapp-DOB
+    sourceType: property
+#  - destName: Source
+#   destType: Property
+#    sourceName: folder
+#   sourceType: index
+
+assignValues:
+  - destName: Document App Plan
+    destType: property
+    destValue: UMDUA PreApp
